@@ -22,5 +22,6 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
-    - name: Build with Ant
-      run: ant -noinput -buildfile chatApp5/ build.xml
+        - name:Build with An
+  run: ant -noinput -buildfile chatApp5/src/chatapp5/chatapp5/build.xml build
+    
