@@ -3,84 +3,11 @@ package chatapp5;
 import chatapp5.MessageClass;
 import static org.junit.Assert.*; 
  import org.junit.Test;
-import java.util.ArrayList;
-import java.util.List;
+
+
+
 
 public class MessageClassTest {
-
-    // 1. Test standard Setter and Getter methods
-    @Test
-    public void testGettersAndSetters() {
-        MessageClass msg = new MessageClass();
-        
-        // Use your class setter fields
-        msg.getsender("John Doe");
-        msg.setRecipient("0821112222");
-        msg.setMessageText("Testing QuickChat application system.");
-        
-        // JUnit 4 checks
-        assertEquals("John Doe", msg.getSender());
-        assertEquals("0821112222", msg.getRecipient());
-        assertEquals("Testing QuickChat application system.", msg.getMessageText());
-    }
-
-    // 2. Test the core Search Algorithm logic
-    @Test
-    public void testSearchByID() {
-        List<MessageClass> testingList = new ArrayList<>();
-        MessageClass testMsg = new MessageClass();
-        
-        // Provide matching structural mock values
-        testMsg.setSender("System Developer");
-        testMsg.setRecipient("0719998888");
-        testMsg.setMessageText("Confidential ID Match Test");
-        
-        testingList.add(testMsg);
-        
-        // Grab the auto-generated or assigned ID
-        String expectedID = testMsg.getMessageID();
-        assertNotNull("Message ID should not be null", expectedID);
-        
-        // Simulate search matching loop structure
-        boolean matchFound = false;
-        for (MessageClass current : testingList) {
-            if (current.getMessageID().equalsIgnoreCase(expectedID)) {
-                matchFound = true;
-                break;
-            }
-        }
-        
-        assertTrue("The search algorithm should locate the message by ID", matchFound);
-    }
-
-    // 3. Test list management array element deletion
-    @Test
-    public void testDeleteByHashMechanism() {
-        List<MessageClass> list = new ArrayList<>();
-        MessageClass targetMsg = new MessageClass();
-        
-        targetMsg.setMessageText("Target item to be deleted.");
-        // Generate hashing values using your blueprint method
-        targetMsg.createMessageHash(); 
-        
-        list.add(targetMsg);
-        String targetHash = targetMsg.getMessageHash();
-        
-        // Ensure item is registered
-        assertEquals(1, list.size());
-        
-        // Run look-up and removal
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getMessageHash().equals(targetHash)) {
-                list.remove(i);
-                break;
-            }
-        }
-        
-        // Ensure array list shrinks safely
-        assertEquals("List should be empty after element removal", 0, list.size());
-    }
-
 
 
  

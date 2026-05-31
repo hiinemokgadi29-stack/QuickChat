@@ -20,8 +20,8 @@ private String messageHash;
 private String sender;
  
     // 2. CLASS CONSTRUCTOR 
-    public MessageClass(String messageID, int numMessagesSent, String recipient, String messageText, String messageHash,String userUsername) { 
-         this.sender = sender;
+    public MessageClass(String messageID, int numMessagesSent, String recipient, String messageText, String messageHash,String firstName) { 
+         this.sender = firstName;
          this.numMessagesSent = numMessagesSent;    
          this.recipient = recipient;   
          this.messageText = messageText;       
