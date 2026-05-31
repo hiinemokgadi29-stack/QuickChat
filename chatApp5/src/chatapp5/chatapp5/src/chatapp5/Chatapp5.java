@@ -133,8 +133,9 @@ boolean usernameCheck = myobject.checkUserName(userUsername); if (usernameCheck 
                     System.out.print("Enter Recipient Cell Number: "); 
                     String cellInput = keyboard.nextLine();                      
                     System.out.print("Enter Message  (Max 250 chars): ");             
-                            String textInput = keyboard.nextLine();          
-                                         if(textInput.length()>250){ 
+                            String textInput = keyboard.nextLine();
+                            
+                           if(textInput.length()>250){ 
                           int excessChars = textInput.length() - 250; 
                           System.out.println("Message exceeds 250 characters by "
 + excessChars + ":Please reduce the size.");                           break; 
@@ -142,7 +143,7 @@ boolean usernameCheck = myobject.checkUserName(userUsername); if (usernameCheck 
                       System.out.println("Massage is ready to send"); 
 
                     MessageClass singleMessage = new 
-MessageClass(String.valueOf(currentMessageCount + 1), currentMessageCount, cellInput, textInput, ""); 
+MessageClass(String.valueOf(currentMessageCount + 1), currentMessageCount, cellInput, textInput, "",""); 
                      
                     String cellValidationStatus = singleMessage.checkRecipientCell(); 
                     System.out.println("Status: " + cellValidationStatus); 
@@ -150,16 +151,17 @@ MessageClass(String.valueOf(currentMessageCount + 1), currentMessageCount, cellI
                     if (cellValidationStatus.equals("Cell phone number successfully captured.")) { 
                         System.out.println("Options:" 
                                 + " 1) Send" 
-                                + " 2) Store"                                 + " 0) Delete");    
-                                                     int action = input.nextInt();        
-                                                                      input.nextLine(); 
+                                + " 2) Store"  
+                                + " 0) Delete");    
+                    int action = input.nextInt();        
+                                 input.nextLine(); 
                          
                          
                         if (action == 1) {                             
                             singleMessage.createMessageHash();                       
                                currentMessageCount++; 
                             sessionMessages.add(singleMessage);                               
-                            
+                            MessageClass.storeMessage(sessionMessages);
 System.out.println(singleMessage.SentMessage(action)); 
                             System.out.println(singleMessage.printMessages()); 
                             
@@ -168,22 +170,60 @@ System.out.println(singleMessage.SentMessage(action));
                      singleMessage.createMessageHash(); 
                             
 System.out.println(singleMessage.SentMessage(action)); 
-                             
+                              MessageClass.storeMessage(sessionMessages); 
                             sessionMessages.add(singleMessage);       
                               currentMessageCount++; 
                             System.out.println(singleMessage.printMessages()); 
+                            
                         }                        
                          else if (action == 0) { 
                             
 System.out.println(singleMessage.SentMessage(action)); 
                         }                     } 
                     break; 
+                    case 2:
+        System.out.println("\n--- STORED MESSAGES MENU ---");
+        System.out.println("a) Display Senders & Recipients");
+        System.out.println("b) Find Longest Message");
+        System.out.println("c) Search by Message ID");
+        System.out.println("d) Search by Recipient");
+        System.out.println("e) Delete by Message Hash");
+        System.out.println("f) Full Report");
+        System.out.print("Select an option (a-f): ");
+        
+        char subChoice = keyboard.next().toLowerCase().charAt(0);
+        keyboard.nextLine(); // Clear scanner buffer
+        
+        switch (subChoice) {
+            case 'a':
+                MessageClass.displaySendersAndRecipients(sessionMessages);
+                break;
+            case 'b':
+                MessageClass.findLongestMessage(sessionMessages);
+                break;
+            case 'c':
+                 MessageClass.searchByMessageID(sessionMessages, keyboard);
+                break;
+            case 'd':
+                 MessageClass.searchByRecipient(sessionMessages, keyboard);
+                break;
+            case 'e':
+                 MessageClass.deleteByMessageHash(sessionMessages, keyboard);
+                break;
+            case 'f':
+                 MessageClass.printFullReport(sessionMessages);
+                break;
+            default:
+                System.out.println("Invalid choice. Please select a-f.");
+                break;
+        }
+        break;
+
  
-                case 2: 
-                    System.out.println("Coming Soon.");                     break; 
- 
+               
                 case 3: 
-                    System.out.println("Exiting ");                     break; 
+                    System.out.println("Exiting ");     
+                    break; 
  
                 default: 
              System.out.println("Invalid selection option. Please choose options 1, 2, or 3."); 
